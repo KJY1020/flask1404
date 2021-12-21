@@ -7,7 +7,7 @@ app = Flask(__name__)
  
 @app.route("/")
 def home():
-    return render_template('index.html', subject="안녕하세요. 반갑습니다. OOO입니다")
+    return render_template('index.html', subject="안녕하세요. 반갑습니다. 김지윤입니다")
  
 #1-1
 @app.route('/<user>')
@@ -23,6 +23,10 @@ def about():
 @app.route("/show1")
 def show1():
     return render_template('img_test1.html', image_file='img/1.jpg')
+
+@app.route("/show2")
+def show2():
+    return render_template('img_test1.html', image_file='img/2.jpg'), '<h1> Merry Christmas ans Happy New Year! </h1>'
  
 #4 기상청1(전국중기예보)
  
@@ -37,9 +41,8 @@ def kma():
   output = ""  
  
   # item 태그를 찾습니다.
- 
- #
- #
+  for item in soup.select("item"):
+    output += "<h3>{}</h3><hr/>".format(item.select_one("title").string)
  
  # location 태그를 찾습니다.
   for location in soup.select("location"):
@@ -48,9 +51,10 @@ def kma():
     output += "날씨: {}</br>".format(location.select_one("wf").string)
     output += "최저/최고 기온: {}/{}".format(location.select_one("tmn").string, location.select_one("tmx").string)
     output += "<hr/>"  
-#
-#
-#
+
+  output += "{}</br>".format(soup.select_one("title").string)
+  output += "날짜: {}</br>".format(location.select_one("tmEf").string)  
+  output += "지역: {}</br>".format(soup.select_one("province").string)
   return output
  
 #5 기상청2(경상남북도 중기예보)
