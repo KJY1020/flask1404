@@ -17,7 +17,7 @@ def hello(user):
 #2 html 연결
 @app.route("/about")
 def about():
-    return render_template('busan1.html', subject="부산중위연령시각화")
+    return render_template('busan.html', subject="부산구군별가로등개수")
  
 #3 이미지2
 @app.route("/show1")
@@ -26,7 +26,7 @@ def show1():
 
 @app.route("/show2")
 def show2():
-    return render_template('img_test1.html', image_file='img/2.jpg'), '<h1> Merry Christmas ans Happy New Year! </h1>'
+    return render_template('img_test1.html', image_file='img/2.jpg')
  
 #4 기상청1(전국중기예보)
  
